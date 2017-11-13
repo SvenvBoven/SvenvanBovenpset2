@@ -13,6 +13,7 @@ public class FirstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_first);
     }
 
+    // button to proceed
     public void goToSecond(View view) {
         Intent intent = new Intent(this,SecondActivity.class);
         startActivity(intent);

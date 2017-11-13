@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context="com.example.sven.svenvanbovenpset2.ThirdActivity">
     <TextView
         android:id="@+id/madlibs"
@@ -15,7 +16,7 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textView"
         android:layout_width="76dp"
         android:layout_height="25dp"
         android:layout_marginEnd="8dp"

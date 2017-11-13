@@ -16,6 +16,7 @@ import java.util.Random;
 
 public class SecondActivity extends AppCompatActivity {
     private Story verhaal;
+    // stores all stories
     String[] verhaaltjes = {"madlib0_simple.txt", "madlib1_tarzan.txt", "madlib2_university.txt",
             "madlib3_clothes.txt", "madlib4_dance.txt"};
     Random rand = new Random();
@@ -24,8 +25,8 @@ public class SecondActivity extends AppCompatActivity {
     private TextView placeholderLeft;
     private EditText woordsoort;
     private Button gotoNextbutton;
-    private Button submitButton;
     private int randomStory = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class SecondActivity extends AppCompatActivity {
         initStory();
     }
 
+    // allows screen rotation and reopening  the app
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         Log.d("savestate", "saving");
@@ -49,12 +51,14 @@ public class SecondActivity extends AppCompatActivity {
         savedInstanceState.putSerializable("storyClass", verhaal);
     }
 
+    // loads up a randomstory
     public void initStory() {
         if (randomStory == -1) {
             randomStory = rand.nextInt(4);
         }
 
         if(verhaal == null) {
+            // idea for assetmanager taken from Stephan de Graaf
             AssetManager assetInputStream = getAssets();
             InputStream loadFile = null;
 
@@ -75,6 +79,7 @@ public class SecondActivity extends AppCompatActivity {
         modifyPlaceholderCounter();
     }
 
+    // counts the amount of inputs already given and still needed
     public void modifyPlaceholderCounter () {
         placeholderRemaining = verhaal.getPlaceholderRemainingCount();
         placeholderTotal = verhaal.getPlaceholderCount();
@@ -83,12 +88,13 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void submitWord(View view) {
-        Button submitButton = findViewById(R.id.button2);
+        Button submitButton = findViewById(R.id.button);
         EditText inputfield = findViewById(R.id.input);
         verhaal.fillInPlaceholder(inputfield.getText().toString());
         woordsoort.setHint(verhaal.getNextPlaceholder());
         modifyPlaceholderCounter();
         inputfield.setText("");
+        // makes the editText invisible and the submit button and shows the next button
         if (placeholderRemaining == 0) {
             inputfield.setVisibility(view.INVISIBLE);
             placeholderLeft.setText("press the button to go to next page");
@@ -97,6 +103,7 @@ public class SecondActivity extends AppCompatActivity {
         }
     }
 
+    // sends app to third
     public void goToThird(View view){
         Intent intent = new Intent(this, ThirdActivity.class);
         intent.putExtra("ourtekst", verhaal.toString());
