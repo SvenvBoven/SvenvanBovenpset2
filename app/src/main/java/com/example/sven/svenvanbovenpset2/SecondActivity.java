@@ -83,7 +83,7 @@ public class SecondActivity extends AppCompatActivity {
     public void modifyPlaceholderCounter () {
         placeholderRemaining = verhaal.getPlaceholderRemainingCount();
         placeholderTotal = verhaal.getPlaceholderCount();
-        String placeholder = "(" + (placeholderTotal - placeholderRemaining) + "/" + placeholderTotal + ")";
+        String placeholder = (placeholderTotal - placeholderRemaining) + "/" + placeholderTotal;
         placeholderLeft.setText(placeholder);
     }
 
